@@ -1,0 +1,19 @@
+{
+    "appId" : "com.zongha.smart-id",
+    "files" : ["dist-electron", "dist-react"],
+    "icon" : "./public/e.png",
+    "extraResources" : ["dist-electron/preload.cjs"],
+    "directories" : {
+        "output" : "releases"
+    },
+    "mac" : {
+        "target" : "dmg"
+    },
+    "linux" : {
+        "target" : ["AppImage", "deb"],
+        "category" : "Utility"
+    },
+    "win" : {
+        "target" : ["portable", "msi"]
+    }
+}
