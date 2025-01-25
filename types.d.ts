@@ -18,14 +18,18 @@ type StaticData = {
 };
 
 type EventPayloadMapping = {
-    statistics : Statistics;
-    getStaticData : StaticData;
-}
+  statistics: Statistics;
+  getStaticData: StaticData;
+};
 
-// INTERFACE TYPESCRIPT -- when there is two interface name it will automatically concat
+type UnsubscribedFunction = () => void;
+
+// INTERFACE TYPESCRIPT -- when there is two interface name it will automatically concatinate
 interface Window {
   electron: {
-    subscribeStatistics: (callback: (statistics: Statistics) => void) => void;
+    subscribeStatistics: (
+      callback: (statistics: Statistics) => void
+    ) => UnsubscribedFunction;
     getStaticData: () => Promise<StaticData>;
   };
 }
