@@ -1,0 +1,7 @@
+.baseChart_container {
+    @apply p-2 border border-[#8884d8] rounded
+}
+
+.area_chart {
+    @apply flex justify-center items-center
+}

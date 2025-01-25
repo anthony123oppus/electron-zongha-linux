@@ -9,6 +9,7 @@ function App() {
         Hello worlddd
       </h1> */}
       <ManagerDashboard />
+      <ManagerDashboard />
     </main>
   );
 }
