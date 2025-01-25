@@ -6,7 +6,7 @@ import { ipcWebContentsSend } from "./util.js";
 
 // **TODO: NEED TO ADD TYPES IN RETURN VALUE**
 
-const POLLING_INTERVAL = 1000;
+const POLLING_INTERVAL = 2000;
 
 export function PollResources(mainWindow: BrowserWindow) {
   setInterval(async () => {

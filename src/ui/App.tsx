@@ -1,24 +1,15 @@
-import { useEffect } from "react";
-import BaseChart from "./components/BaseChart";
+import ManagerDashboard from "./pages/ManagerDashboard/ManagerDashboard";
 
 function App() {
 
-  useEffect(() => {
-    const unsub = window.electron.subscribeStatistics((stats) =>
-      console.log(stats)
-    );
-    return unsub;
-  }, []);
-
   return (
-    <section className="w-screen h-screen flex justify-center items-center flex-col">
-      <div className="w-fit h-40">
-        <BaseChart data={[{value : 45}]}/>
-      </div>
+    <main className="w-screen h-screen">
+        {/* <BaseChart className="h-60 w-1/2" data={[{value : 40}, {value :89}, {value :90}, {value : 5}]}/>
       <h1 className="text-3xl font-bold underline text-red-500">
         Hello worlddd
-      </h1>
-    </section>
+      </h1> */}
+      <ManagerDashboard />
+    </main>
   );
 }
 
