@@ -10,6 +10,9 @@ import {
 } from "recharts";
 import { BaseChartProps } from "./BaseChart-props";
 
+// STYLES CSS IMPORT 
+import styles from "./styles/BaseChart.module.css"
+
 const BaseChart = <T,>(props: BaseChartProps<T>) => {
   // DESTRUCTURING PROPS
   const { 
@@ -25,10 +28,10 @@ const BaseChart = <T,>(props: BaseChartProps<T>) => {
   };
 
   return (
-    <div className={clsx("p-2 border border-[#8884d8] rounded", className)}>
+    <div className={clsx(styles.baseChart_container, className)}>
       <ResponsiveContainer>
         <AreaChart
-          className="flex justify-center items-center"
+          className={styles.area_chart}
           // width={730}
           // height={250}
           data={data}

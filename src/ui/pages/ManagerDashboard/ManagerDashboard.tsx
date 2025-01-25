@@ -16,20 +16,20 @@ const ManagerDashboard = () => {
     <section className={styles.dashboard_container}>
       <BaseChart<UsageType>
         dataKey="cpuUsage"
-        className="h-60 w-1/4"
+        className={styles.chart}
         data={cpuUsage}
         tooltipLabel="CPU Usage"
       />
       <BaseChart<UsageType>
         dataKey="ramUsage"
-        className="h-60 w-1/4"
+        className={styles.chart}
         data={ramUsage}
         tooltipLabel="Ram Usage"
       />
 
       <BaseChart<UsageType>
         dataKey="storageUsage"
-        className="h-60 w-1/4"
+        className={styles.chart}
         data={storageUsage}
         tooltipLabel="Storage Usage"
       />
