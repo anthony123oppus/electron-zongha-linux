@@ -7,6 +7,11 @@ electron.contextBridge.exposeInMainWorld("electron", {
       callback(stats);
     });
   },
+  subscribeSystemView: (callback) => {
+    return ipcOn("systemView", (view) => {
+      callback(view);
+    });
+  },
   getStaticData: () => ipcInvoke("getStaticData"),
 } satisfies Window["electron"]);
 

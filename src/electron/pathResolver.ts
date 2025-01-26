@@ -5,7 +5,7 @@ import { isDev } from "./util.js";
 export function getPreloadPath() {
   return path.join(
     app.getAppPath(),
-    isDev() ? "." : "..",
+    isDev() ? "." : "",
     "/dist-electron/preload.cjs"
   );
 }
@@ -17,7 +17,7 @@ export function getUIPath() {
 export function getAssetPath() {
   return path.join(
     app.getAppPath(),
-    isDev() ? "." : "..",
+    isDev() ? "." : "",
     "/src/assets"
     );
 }

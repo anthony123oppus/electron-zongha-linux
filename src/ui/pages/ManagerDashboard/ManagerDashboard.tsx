@@ -6,14 +6,18 @@ import { MAX_DATA_POINTS } from "./constant/ManagerDashboard-constant";
 
 // STYLE CSS IMPORT
 import styles from "./styles/ManagerDashboard.module.css"
+import { useNavigate } from "react-router-dom";
 
 const ManagerDashboard = () => {
+
+  const navigate = useNavigate()
   // Hooks Initialization Part
   const statics = useStatistics(MAX_DATA_POINTS);
   const { cpuUsage, ramUsage, storageUsage } = usePreparedData(statics, MAX_DATA_POINTS);
 
   return (
     <section className={styles.dashboard_container}>
+      <div onClick={() => navigate("/")} >Home</div>
       <BaseChart<UsageType>
         dataKey="cpuUsage"
         className={styles.chart}
