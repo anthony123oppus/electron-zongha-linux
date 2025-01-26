@@ -1,16 +1,21 @@
-import ManagerDashboard from "./pages/ManagerDashboard/ManagerDashboard";
+import { Fragment, useEffect } from "react";
+import { AppRoutes } from "./routes/AppRoutes";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    return window.electron.subscribeSystemView((view) => navigate(view));
+  }, [navigate]);
 
   return (
-    <main className="w-screen h-screen">
-        {/* <BaseChart className="h-60 w-1/2" data={[{value : 40}, {value :89}, {value :90}, {value : 5}]}/>
-      <h1 className="text-3xl font-bold underline text-red-500">
-        Hello worlddd
-      </h1> */}
-      <ManagerDashboard />
-      <ManagerDashboard />
-    </main>
+    <Fragment>
+      <AppRoutes />
+      <a href="/resource" className="text-black">
+        ajsfkljail
+      </a>
+    </Fragment>
   );
 }
 

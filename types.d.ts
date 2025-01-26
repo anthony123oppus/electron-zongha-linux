@@ -17,9 +17,12 @@ type StaticData = {
   totalMemoryGB: number;
 };
 
+type SystemView = "resource"
+
 type EventPayloadMapping = {
   statistics: Statistics;
   getStaticData: StaticData;
+  systemView : SystemView
 };
 
 type UnsubscribedFunction = () => void;
@@ -31,5 +34,8 @@ interface Window {
       callback: (statistics: Statistics) => void
     ) => UnsubscribedFunction;
     getStaticData: () => Promise<StaticData>;
+    subscribeSystemView: (
+      callback: (systemView: SystemView) => void
+    ) => UnsubscribedFunction;
   };
 }
