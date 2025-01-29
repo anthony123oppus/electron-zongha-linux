@@ -14,10 +14,13 @@ export function getUIPath() {
   return path.join(app.getAppPath(), "/dist-react/index.html");
 }
 
-export function getAssetPath() {
+export function getIconPath() {
   return path.join(
-    app.getAppPath(),
-    isDev() ? "." : "",
-    "/src/assets"
-    );
+    getAssetPath(),
+    process.platform === "darwin" ? "trayIconTemplate.png" : "trayIcon.png"
+  );
+}
+
+export function getAssetPath() {
+  return path.join(app.getAppPath(), isDev() ? "." : "", "/src/assets");
 }

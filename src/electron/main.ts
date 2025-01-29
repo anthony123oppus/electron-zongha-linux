@@ -1,18 +1,15 @@
 import { app, BrowserWindow } from "electron";
-import { ipcMainHandle, isDev } from "./util.js";
+import { ipcApiRequestHandler, ipcMainHandle, isDev } from "./util.js";
 import { getStaticData, PollResources } from "./resourceManager.js";
-import { getAssetPath, getPreloadPath, getUIPath } from "./pathResolver.js";
+import { getIconPath, getPreloadPath, getUIPath } from "./pathResolver.js";
 import { createTray } from "./tray.js";
 import { createMenu } from "./menu.js";
-import path from "path";
+import { getApiRequest, postApiRequest } from "./api/api.js";
 
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
     // frame : false,
-    icon: path.join(
-      getAssetPath(),
-      process.platform === "darwin" ? "trayIconTemplate.png" : "trayIcon.png"
-    ),
+    icon: getIconPath(),
     webPreferences: {
       preload: getPreloadPath(),
     },
@@ -34,6 +31,16 @@ app.on("ready", () => {
     return getStaticData();
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ipcApiRequestHandler("apiGetRequest", async (payload: any) => {
+    return await getApiRequest(payload);
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ipcApiRequestHandler("apiPostRequest", async (payload: any) => {
+    return await postApiRequest(payload);
+  });
+
   // Create a Tray Icon and context menu in Notification Panel
   createTray(mainWindow);
 
@@ -44,9 +51,17 @@ app.on("ready", () => {
   handleCloseEvents(mainWindow);
 });
 
+// function sampleapireq({name : string}) {
+//   try {
+
+//   } catch (error) {
+
+//   }
+// }
+
 /**
- * This function handle the closing if the app close ( x button in top) it only hiding
- *    but the app click (Exit -dropdown menu of FILE TAB) it will quit and close the app
+ * This function handle the closing if the app close using ( x button in top) it only hide
+ *    but the app click (Exit - dropdown menu of FILE or app TAB) it will quit and close the app
  *
  * @param mainWindow
  */
