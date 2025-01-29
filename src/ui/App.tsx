@@ -24,6 +24,11 @@ interface PostResponse {
   createdAt : string
 }
 
+interface CatFactReqTypes {
+  fact : string
+  length : number
+}
+
 function App() {
   const navigate = useNavigate();
 
@@ -53,7 +58,7 @@ function App() {
 
   const getRequest = async () => {
     try {
-      const response = await window.electron.getApiRequest<{fact : string, length : number}>({url : "https://catfact.ninja/fact"})
+      const response = await window.electron.getApiRequest<CatFactReqTypes>({url : "fact"})
       console.log(response)
     } catch (error) {
       console.log(error)
