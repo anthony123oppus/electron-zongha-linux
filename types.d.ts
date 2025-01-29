@@ -19,16 +19,23 @@ type StaticData = {
 
 type SystemView = "resource";
 
+type GetAPIPayloadTypes = {
+  url: string;
+  headers?: Record<string, string> | null;
+};
+
 type PostApiRequestTypes<T> = {
   url: string;
   data: T;
   headers?: Record<string, string> | null;
 };
 
-type GetAPIPayloadTypes = {
+type PutApiRequestTypes<T> = {
   url: string;
+  data: T;
   headers?: Record<string, string> | null;
 };
+
 
 type ElectronSuccessResponseTypes<R> = {
   data: R;

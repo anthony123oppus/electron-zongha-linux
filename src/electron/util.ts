@@ -21,7 +21,7 @@ export function ipcMainHandle<Key extends keyof EventPayloadMapping>(
 
 export function ipcApiRequestHandler<Key extends keyof EventPayloadMapping, T, R>(
   key : Key,
-  handler : (payload : T) => Promise<R | AxiosError>
+  handler : (payload : T) => Promise< R | AxiosError>
 ) {
   ipcMain.handle(key, async (event, payload) => {
     if(event.senderFrame) {
@@ -40,13 +40,16 @@ export function ipcWebContentsSend<Key extends keyof EventPayloadMapping>(
 }
 
 export function validateEventFrame(frame : WebFrameMain) {
+  console.log(new URL(frame.url).host, pathToFileURL(getUIPath()).toString())
   if (isDev() && new URL(frame.url).host === 'localhost:5123') {
     return;
   }
 
-  if(frame.url !== pathToFileURL(getUIPath()).toString()) {
-    throw new Error("Malicious Event")
+  if(!frame.url.startsWith(pathToFileURL(getUIPath()).toString())) {
+    throw new Error(`Malicious Event : ${frame.url} : ${new URL(frame.url).host} : ${pathToFileURL(getUIPath()).toString()}`)
   }
+
+  return;
 }
 
 
