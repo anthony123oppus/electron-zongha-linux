@@ -19,10 +19,29 @@ type StaticData = {
 
 type SystemView = "resource"
 
+type PostApiRequestTypes<T> = {
+  url : string;
+  data: T;
+  headers?: Record<string, string> | null;
+}
+
+type GetAPIPayloadTypes = {
+  url: string;
+  headers?: Record<string, string> | null;
+}
+
+type ElectronSuccessResponseTypes<R> = {
+  data : R;
+  status : number;
+  statusText : string
+}
+
 type EventPayloadMapping = {
   statistics: Statistics;
   getStaticData: StaticData;
-  systemView : SystemView
+  systemView : SystemView;
+  apiGetRequest : unknown;
+  apiPostRequest : unknown;
 };
 
 type UnsubscribedFunction = () => void;
@@ -37,5 +56,7 @@ interface Window {
     subscribeSystemView: (
       callback: (systemView: SystemView) => void
     ) => UnsubscribedFunction;
+    getApiRequest : <R>(option : GetAPIPayloadTypes) => Promise<ElectronSuccessResponseTypes<R>>;
+    postApiRequest : <T, R>(option : PostApiRequestTypes<T>) => Promise<ElectronSuccessResponseTypes<R>>;
   };
 }

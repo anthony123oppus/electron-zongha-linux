@@ -18,6 +18,18 @@ export function ipcMainHandle<Key extends keyof EventPayloadMapping>(
   });
 }
 
+export function ipcApiRequestHandler<Key extends keyof EventPayloadMapping>(
+  key : Key,
+  handler : (payload : unknown) => Promise<unknown>
+) {
+  ipcMain.handle(key, async (event, payload) => {
+    if(event.senderFrame) {
+      validateEventFrame(event.senderFrame)
+      return handler(payload)
+    }
+  })
+}
+
 export function ipcWebContentsSend<Key extends keyof EventPayloadMapping>(
   key: Key,
   webContents: WebContents,
@@ -27,7 +39,6 @@ export function ipcWebContentsSend<Key extends keyof EventPayloadMapping>(
 }
 
 export function validateEventFrame(frame : WebFrameMain) {
-  console.log(frame.url)
   if (isDev() && new URL(frame.url).host === 'localhost:5123') {
     return;
   }

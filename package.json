@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
+    "axios": "^1.7.9",
     "clsx": "^2.1.1",
     "os-utils": "^0.0.14",
     "react": "^18.3.1",
