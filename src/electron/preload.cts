@@ -18,12 +18,14 @@ electron.contextBridge.exposeInMainWorld("electron", {
     ipcPostApiInvoke<"apiPostRequest", T,R>("apiPostRequest", option),
 } satisfies Window["electron"]);
 
+
 // NORMAL INVOKE
 function ipcInvoke<Key extends keyof EventPayloadMapping>(
   key: Key
 ): Promise<EventPayloadMapping[Key]> {
   return electron.ipcRenderer.invoke(key);
 }
+
 
 // GET API REQUEST INVOKE
 function ipcGetApiInvoke<Key extends keyof EventPayloadMapping, R>(
@@ -50,14 +52,3 @@ function ipcOn<Key extends keyof EventPayloadMapping>(
   return () => electron.ipcRenderer.off(key, cb);
 }
 
-/**
- * OLD CODE
- */
-// electron.contextBridge.exposeInMainWorld("electron", {
-//   subscribeStatistics: (callback: (statistics: any) => void) => {
-//     electron.ipcRenderer.on("statistics", (_, stats) => {
-//       callback(stats);
-//     })
-//   },
-//   getStaticData: () => electron.ipcRenderer.invoke("getStaticData"),
-// } satisfies Window["electron"]);
