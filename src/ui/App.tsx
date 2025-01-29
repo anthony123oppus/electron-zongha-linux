@@ -1,8 +1,8 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { AppRoutes } from "./routes/AppRoutes";
 import { useNavigate } from "react-router-dom";
 
-interface TypePost {
+export interface TypePost {
   name: string;
   data: {
     year: number;
@@ -12,7 +12,7 @@ interface TypePost {
   };
 }
 
-interface PostResponse {
+export interface PostResponse {
   id : string;
   name : string;
   data: {
@@ -24,13 +24,16 @@ interface PostResponse {
   createdAt : string
 }
 
-interface CatFactReqTypes {
+export interface CatFactReqTypes {
   fact : string
   length : number
 }
 
 function App() {
   const navigate = useNavigate();
+
+  const [catFact, setCatFact] = useState<string>("")
+  const [postSample, setPostSample] = useState<PostResponse | null>(null)
 
   useEffect(() => {
     return window.electron.subscribeSystemView((view) => navigate(view));
@@ -50,6 +53,7 @@ function App() {
           },
         },
       });
+      setPostSample(response.data)
       console.log(response)
     } catch (error) {
       console.log(error)
@@ -59,6 +63,7 @@ function App() {
   const getRequest = async () => {
     try {
       const response = await window.electron.getApiRequest<CatFactReqTypes>({url : "fact"})
+      setCatFact(response.data.fact)
       console.log(response)
     } catch (error) {
       console.log(error)
@@ -68,9 +73,15 @@ function App() {
   return (
     <Fragment>
       <AppRoutes />
-      <a href="/resource" className="text-black">
+      <div className="text-black"onClick={() => navigate("resource")}>
         ajsfkljail
-      </a>
+      </div>
+      <div>
+        {catFact}
+      </div>
+      <div>
+        {postSample && postSample.name}
+      </div>
 
       <div onClick={handleClickPost}>
         hello try post

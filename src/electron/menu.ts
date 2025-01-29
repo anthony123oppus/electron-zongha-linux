@@ -1,5 +1,5 @@
 import { app, BrowserWindow, Menu, MenuItemConstructorOptions } from "electron";
-import { ipcWebContentsSend, isDev } from "./util.js";
+import { ipcWebContentsSend } from "./util.js";
 
 export function createMenu(mainWindow: BrowserWindow) {
   const menuTemplate: MenuItemConstructorOptions[] = [
@@ -35,7 +35,7 @@ export function createMenu(mainWindow: BrowserWindow) {
           label: "Devtool",
           id: "devtool",
           type: "checkbox",
-          visible: isDev(),
+          // visible: isDev(),
           click: (menuItem) => {
             if (menuItem.checked) {
               mainWindow.webContents.openDevTools();
