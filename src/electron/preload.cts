@@ -16,6 +16,8 @@ electron.contextBridge.exposeInMainWorld("electron", {
   getApiRequest: <R,>(option: GetAPIPayloadTypes) => ipcGetApiInvoke<"apiGetRequest", R>("apiGetRequest", option),
   postApiRequest: <T,R>(option: PostApiRequestTypes<T>) =>
     ipcPostApiInvoke<"apiPostRequest", T,R>("apiPostRequest", option),
+  putApiReqeust : <T, R>(option : PutApiRequestTypes<T>) => 
+    ipcPutApiInvoke<"apiPutRequest", T, R>("apiPutRequest", option) 
 } satisfies Window["electron"]);
 
 
@@ -25,7 +27,6 @@ function ipcInvoke<Key extends keyof EventPayloadMapping>(
 ): Promise<EventPayloadMapping[Key]> {
   return electron.ipcRenderer.invoke(key);
 }
-
 
 // GET API REQUEST INVOKE
 function ipcGetApiInvoke<Key extends keyof EventPayloadMapping, R>(
@@ -40,6 +41,14 @@ function ipcPostApiInvoke<Key extends keyof EventPayloadMapping, T, R>(
   key: Key,
   option: PostApiRequestTypes<T>
 ): Promise<ElectronSuccessResponseTypes<R>> {
+  return electron.ipcRenderer.invoke(key, option);
+}
+
+// PUT API REQUEST INVOKE
+function ipcPutApiInvoke<Key extends keyof EventPayloadMapping, T, R>(
+  key : Key,
+  option : PutApiRequestTypes<T>
+) : Promise<ElectronSuccessResponseTypes<R>> {
   return electron.ipcRenderer.invoke(key, option);
 }
 

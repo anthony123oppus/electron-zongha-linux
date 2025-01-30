@@ -49,6 +49,7 @@ type EventPayloadMapping = {
   systemView: SystemView;
   apiGetRequest: ElectronSuccessResponseTypes<unknown>;
   apiPostRequest: ElectronSuccessResponseTypes<unknown>;
+  apiPutRequest : ElectronSuccessResponseTypes<unknown>;
 };
 
 type UnsubscribedFunction = () => void;
@@ -73,6 +74,10 @@ interface Window {
 
     postApiRequest: <T, R>(
       option: PostApiRequestTypes<T>
+    ) => Promise<ElectronSuccessResponseTypes<R>>;
+
+    putApiReqeust : <T, R> (
+      option : PutApiRequestTypes<T>
     ) => Promise<ElectronSuccessResponseTypes<R>>;
   };
 }
