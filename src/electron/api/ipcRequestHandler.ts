@@ -1,5 +1,5 @@
 import { ipcApiRequestHandler } from "../util.js";
-import { getApiRequest, postApiRequest } from "./api.js";
+import { getApiRequest, postApiRequest, putApiRequest } from "./api.js";
 
 export function IpcRequestHandler() {
   // Handler of API GET REQUEST
@@ -11,7 +11,7 @@ export function IpcRequestHandler() {
     return await getApiRequest(payload);
   });
 
-  // Handler of POST GET REQUEST
+  // Handler of API GET REQUEST
   ipcApiRequestHandler<
     "apiPostRequest",
     PostApiRequestTypes<unknown>,
@@ -19,4 +19,13 @@ export function IpcRequestHandler() {
   >("apiPostRequest", async (payload: PostApiRequestTypes<unknown>) => {
     return await postApiRequest(payload);
   });
+
+  // Handler of API PUT REQUEST
+  ipcApiRequestHandler<
+    "apiPutRequest",
+    PutApiRequestTypes<unknown>,
+    ElectronSuccessResponseTypes<unknown>
+  >("apiPutRequest", async (payload : PutApiRequestTypes<unknown>) => {
+    return await putApiRequest(payload)
+  })
 }

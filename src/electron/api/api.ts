@@ -73,10 +73,12 @@ export async function putApiRequest<T, R>(
 ): Promise<ElectronSuccessResponseTypes<R> | AxiosError> {
   const { url, data, headers } = payload;
 
+  // HANDLE EITHER HAVE HEADER OR NULL
   const config = {
     headers: headers || {},
   };
 
+  // TRY CATCH CODE
   try {
     const response = await axiosInstance.put(url, data, config);
 
