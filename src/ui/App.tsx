@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { AppRoutes } from "./routes/AppRoutes";
+import { AppRoutes } from "./_routes/AppRoutes";
 import { useNavigate } from "react-router-dom";
 
 export interface TypePost {
@@ -40,6 +40,9 @@ function App() {
   const [postSample, setPostSample] = useState<PostResponse | null>(null)
 
   const [putSample, setPutSample] = useState<PutResponse | null>(null)
+  const [deleteMessage, setDeleteMessage] = useState<string>("")
+  const [patchSample, setPatchSample] = useState<PutResponse | null>(null)
+
 
 
   useEffect(() => {
@@ -99,6 +102,34 @@ function App() {
     }
   }
 
+  const deleteRequest = async () => {
+    try {
+      const response = await window.electron.deleteApiRequest<{message : string}>({
+        url : `https://api.restful-api.dev/objects/ff808181932badb60194bcc614982c28`
+      })
+      console.log(response)
+      setDeleteMessage(response.data.message)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const patchRequest  = async () => {
+    try {
+      const response = await window.electron.patchApiRequest<{name : string}, PutResponse >({
+        url : "https://api.restful-api.dev/objects/ff808181932badb60194bec5443e2f16",
+        data: {
+          name: "Lenovo Pro dee 223",
+        },
+      })
+
+      console.log(response)
+      setPatchSample(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Fragment>
       <AppRoutes />
@@ -114,6 +145,12 @@ function App() {
       <div>
         {putSample && putSample.name}
       </div>
+      <div>
+        {deleteMessage}
+      </div>
+      <div>
+        {patchSample && patchSample.name}
+      </div>
 
       <div onClick={handleClickPost}>
         hello try post
@@ -124,6 +161,14 @@ function App() {
 
       <div onClick={putRequest}>
         sample put request
+      </div>
+
+      <div onClick={deleteRequest}>
+        sample delete request
+      </div>
+
+      <div onClick={patchRequest}>
+        sample patch request
       </div>
     </Fragment>
   );

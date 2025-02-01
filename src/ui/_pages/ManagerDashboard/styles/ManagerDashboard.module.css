@@ -1,6 +1,7 @@
 .dashboard_container {
     @apply w-full h-screen flex justify-center items-center flex-wrap gap-7
 }
+
 .chart {
     @apply h-60 w-1/4
 }

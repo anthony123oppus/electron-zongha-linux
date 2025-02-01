@@ -1,0 +1,6 @@
+{
+    "common" : {
+        "home" : "Home",
+        "sample" : "Sample alone {{aham}}"
+    }
+}
