@@ -13,11 +13,22 @@ electron.contextBridge.exposeInMainWorld("electron", {
     });
   },
   getStaticData: () => ipcInvoke("getStaticData"),
-  getApiRequest: <R,>(option: GetAPIPayloadTypes) => ipcGetApiInvoke<"apiGetRequest", R>("apiGetRequest", option),
-  postApiRequest: <T,R>(option: PostApiRequestTypes<T>) =>
+
+  getApiRequest: <R,>(option: GetAPIPayloadTypes) => 
+    ipcGetApiInvoke<"apiGetRequest", R>("apiGetRequest", option),
+
+  postApiRequest: <T, R>(option: PostApiRequestTypes<T>) =>
     ipcPostApiInvoke<"apiPostRequest", T,R>("apiPostRequest", option),
+
   putApiReqeust : <T, R>(option : PutApiRequestTypes<T>) => 
-    ipcPutApiInvoke<"apiPutRequest", T, R>("apiPutRequest", option) 
+    ipcPutApiInvoke<"apiPutRequest", T, R>("apiPutRequest", option),
+
+  deleteApiRequest : <R,>(option : DeleteApiRequestTypes) => 
+    ipcDeleteApiInvoke<"apiDeleteRequest", R>("apiDeleteRequest", option),
+  
+  patchApiRequest : <T, R>(option : PatchApiRequestTypes<T>) =>
+    ipcPatchApiInvoke<"apiPatchRequest", T, R>("apiPatchRequest", option)
+
 } satisfies Window["electron"]);
 
 
@@ -50,6 +61,22 @@ function ipcPutApiInvoke<Key extends keyof EventPayloadMapping, T, R>(
   option : PutApiRequestTypes<T>
 ) : Promise<ElectronSuccessResponseTypes<R>> {
   return electron.ipcRenderer.invoke(key, option);
+}
+
+// DELETE API REQUEST INVOKE
+function ipcDeleteApiInvoke<Key extends keyof EventPayloadMapping, R>(
+  key : Key,
+  option : DeleteApiRequestTypes
+) : Promise<ElectronSuccessResponseTypes<R>> {
+  return electron.ipcRenderer.invoke(key, option)
+}
+
+// PATCH API REQUEST INVOKE
+function ipcPatchApiInvoke<Key extends keyof EventPayloadMapping, T, R>(
+  key : Key,
+  option : PatchApiRequestTypes<T>
+) : Promise<ElectronSuccessResponseTypes<R>> {
+  return electron.ipcRenderer.invoke(key, option)
 }
 
 function ipcOn<Key extends keyof EventPayloadMapping>(

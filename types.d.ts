@@ -36,6 +36,17 @@ type PutApiRequestTypes<T> = {
   headers?: Record<string, string> | null;
 };
 
+type DeleteApiRequestTypes = {
+  url: string;
+  headers?: Record<string, string> | null;
+};
+
+type PatchApiRequestTypes<T> = {
+  url : string;
+  data : T,
+  headers? : Record<string, string> | null
+}
+
 
 type ElectronSuccessResponseTypes<R> = {
   data: R;
@@ -50,6 +61,8 @@ type EventPayloadMapping = {
   apiGetRequest: ElectronSuccessResponseTypes<unknown>;
   apiPostRequest: ElectronSuccessResponseTypes<unknown>;
   apiPutRequest : ElectronSuccessResponseTypes<unknown>;
+  apiDeleteRequest : ElectronSuccessResponseTypes<unknown>;
+  apiPatchRequest : ElectronSuccessResponseTypes<unknown>;
 };
 
 type UnsubscribedFunction = () => void;
@@ -68,16 +81,24 @@ interface Window {
       callback: (systemView: SystemView) => void
     ) => UnsubscribedFunction;
 
-    getApiRequest: <R>(
+    getApiRequest: <R> (
       option: GetAPIPayloadTypes
     ) => Promise<ElectronSuccessResponseTypes<R>>;
 
-    postApiRequest: <T, R>(
+    postApiRequest: <T, R> (
       option: PostApiRequestTypes<T>
     ) => Promise<ElectronSuccessResponseTypes<R>>;
 
     putApiReqeust : <T, R> (
       option : PutApiRequestTypes<T>
+    ) => Promise<ElectronSuccessResponseTypes<R>>;
+
+    deleteApiRequest : <R> (
+      option : DeleteApiRequestTypes
+    ) => Promise<ElectronSuccessResponseTypes<R>>;
+
+    patchApiRequest : <T, R> (
+      option : PatchApiRequestTypes<T>
     ) => Promise<ElectronSuccessResponseTypes<R>>;
   };
 }

@@ -40,7 +40,6 @@ export function ipcWebContentsSend<Key extends keyof EventPayloadMapping>(
 }
 
 export function validateEventFrame(frame : WebFrameMain) {
-  console.log(new URL(frame.url).host, pathToFileURL(getUIPath()).toString())
   if (isDev() && new URL(frame.url).host === 'localhost:5123') {
     return;
   }
