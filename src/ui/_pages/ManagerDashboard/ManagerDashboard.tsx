@@ -1,14 +1,13 @@
 import BaseChart from "../../_components/BaseChart/BaseChart";
 import { useStatistics } from "./_hooks/useStatistics-hook";
 import { usePreparedData } from "./_hooks/usePreparedData-hook";
-import { UsageType } from "./ManagerDashboard-props";
+import { PostResponse, TypePost, UsageType } from "./ManagerDashboard-props";
 import { MAX_DATA_POINTS } from "./_constant/ManagerDashboard-constant";
 
 // STYLE CSS IMPORT
 import styles from "./_styles/ManagerDashboard.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { PostResponse, TypePost } from "../../App";
 import { useGetSampleMutation, useGetSampleQuery, usePostSampleMutation } from "./_operation/ManagerDashboard-fetch";
 import { useAppDispatch } from "../../_redux/storeType";
 

@@ -1,9 +1,9 @@
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { sampleGetService, samplePostService } from "../../../_services";
 import { Dispatch, SetStateAction } from "react";
-import { CatFactReqTypes, PostResponse, TypePost } from "../../../App";
 import { AppDispatch } from "../../../_redux/storeType";
 import { loaderActions } from "../../../_redux/loader.slice";
+import { CatFactReqTypes, PostResponse, TypePost } from "../ManagerDashboard-props";
 
 interface UseGetSampleMutationProps {
   setCatFact: Dispatch<SetStateAction<string>>;
