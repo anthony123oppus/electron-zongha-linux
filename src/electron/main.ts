@@ -9,6 +9,7 @@ import { IpcRequestHandler } from "./api/ipcRequestHandler.js";
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
     // frame : false,
+    show : false,
     icon: getIconPath(),
     webPreferences: {
       preload: getPreloadPath(),
@@ -30,6 +31,10 @@ app.on("ready", () => {
   ipcMainHandle("getStaticData", () => {
     return getStaticData();
   });
+
+  mainWindow.once("ready-to-show", () => {
+    mainWindow.show()
+  })
 
   // Separate all Request Handler
   IpcRequestHandler()

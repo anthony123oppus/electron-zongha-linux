@@ -16,7 +16,14 @@ export default {
         softBlue : "#93bcf0",
         darkBlue : "#0e518b",
         vividbLUE : "#1f8ef2"
-      }
+      },
+      backgroundColor : {
+        blackBlue : "#021225",
+        mightnightBlue : "#041c40",
+        softBlue : "#93bcf0",
+        darkBlue : "#0e518b",
+        vividbLUE : "#1f8ef2"
+      },
     },
   },
   plugins: [],
