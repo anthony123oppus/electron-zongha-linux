@@ -1,29 +1,33 @@
 import BaseChart from "../../_components/BaseChart/BaseChart";
-import { useStatistics } from "./hooks/useStatistics-hook";
-import { usePreparedData } from "./hooks/usePreparedData-hook";
+import { useStatistics } from "./_hooks/useStatistics-hook";
+import { usePreparedData } from "./_hooks/usePreparedData-hook";
 import { UsageType } from "./ManagerDashboard-props";
-import { MAX_DATA_POINTS } from "./constant/ManagerDashboard-constant";
+import { MAX_DATA_POINTS } from "./_constant/ManagerDashboard-constant";
 
 // STYLE CSS IMPORT
-import styles from "./styles/ManagerDashboard.module.css";
+import styles from "./_styles/ManagerDashboard.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { PostResponse, TypePost } from "../../App";
-import { useGetSampleMutation, usePostSampleMutation } from "./operation/ManagerDashboard-fetch";
+import { useGetSampleMutation, useGetSampleQuery, usePostSampleMutation } from "./_operation/ManagerDashboard-fetch";
+import { useAppDispatch } from "../../_redux/storeType";
 
 const ManagerDashboard = () => {
   const navigate = useNavigate();
   // Hooks Initialization Part
+  const dispatch = useAppDispatch();
   const statics = useStatistics(MAX_DATA_POINTS);
   const { cpuUsage, ramUsage, storageUsage } = usePreparedData(
     statics,
     MAX_DATA_POINTS
   );
+
   const [postSample, setPostSample] = useState<PostResponse | null>(null);
   const [catFact, setCatFact] = useState<string>("");
 
-  const { mutate } = useGetSampleMutation({ setCatFact });
+  const { mutate } = useGetSampleMutation({ setCatFact, dispatch });
   const {mutate : postMutate} = usePostSampleMutation({setPostSample})
+  const {data} = useGetSampleQuery();
 
   const handleClickPost = async () => {
     const data : TypePost =  {
@@ -41,6 +45,7 @@ const ManagerDashboard = () => {
 
   return (
     <section className={styles.dashboard_container}>
+      <div>{data.data.fact}</div>
       <div onClick={() => navigate("/")}>Home</div>
       <div className="text-black" onClick={() => navigate("resource")}>
         ajsfkljail

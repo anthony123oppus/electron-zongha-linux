@@ -1,11 +1,5 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError } from "axios";
 import axiosInstance from "./axiosInstance.js";
-
-interface ElectronResponseTypes {
-  data: AxiosResponse["data"];
-  status: number;
-  statusText: string;
-}
 
 // GET API REQUEST HANDLER
 export async function getApiRequest<R>(
@@ -28,7 +22,7 @@ export async function getApiRequest<R>(
       data: response.data,
       status: response.status,
       statusText: response.statusText,
-    } as ElectronResponseTypes;
+    } as ElectronSuccessResponseTypes<R>;
 
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -96,7 +90,7 @@ export async function putApiRequest<T, R>(
 
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      return error;
+      throw error;
     } else {
       throw new AxiosError("An unexpected error occurred");
     }
