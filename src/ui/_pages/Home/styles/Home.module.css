@@ -1,11 +1,5 @@
 .homeContainer {
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-  @apply h-screen w-screen flex flex-col px-10 pb-2;
+  @apply h-screen w-screen flex flex-col px-16  bg-[#0a0a1f] relative;
 }
 
 .schoolLogoImage {
@@ -23,3 +17,4 @@
   filter: drop-shadow(0px 0px 10px rgba(9, 9, 9, 0.5));
   @apply h-full;
 }
+

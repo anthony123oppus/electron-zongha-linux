@@ -1,0 +1,19 @@
+.user_profile_card_container {
+    @apply w-full bg-[#1ad1ff] rounded-full relative overflow-hidden
+}
+
+.user_profile_label {
+    @apply text-sm font-semibold font-inter italic absolute py-[2px] pl-16 pr-2 rounded-lg bg-white z-10 top-0 left-0
+}
+
+.user_profile_icon_container {
+    @apply p-2 w-full h-full bg-white relative
+}
+
+.user_profile_icon {
+    @apply bg-[#1ad1ff] rounded-full relative flex items-center
+}
+
+.user_profile_value {
+    @apply absolute bottom-1 pl-14 text-lg font-lexend font-bold text-black
+}

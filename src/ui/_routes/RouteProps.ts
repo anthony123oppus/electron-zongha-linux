@@ -1,6 +1,7 @@
 import { ElementType } from "react";
 import Home from "../_pages/Home/Home";
 import ManagerDashboard from "../_pages/ManagerDashboard/ManagerDashboard";
+import StudentCheckIn from "../_pages/StudentCheckIn/StudentCheckIn"
 
 export interface RoutePropsInterface {
   label: string;
@@ -18,5 +19,10 @@ export const ROUTEPROPS: { [key: string]: RoutePropsInterface } = {
     label :  "Dashboard Manager",
     path : "/resource",
     element : ManagerDashboard
+  },
+  STUDENT_CHECKIN : {
+    label : "Student Check In",
+    path : "student-checkIn",
+    element : StudentCheckIn
   }
 };

@@ -16,6 +16,10 @@ export function AppRoutes() {
           path={ROUTEPROPS.MANAGER.path}
           element={<ROUTEPROPS.MANAGER.element />}
         />
+        <Route 
+          path={ROUTEPROPS.STUDENT_CHECKIN.path}
+          element={<ROUTEPROPS.STUDENT_CHECKIN.element />}
+        />
       </Routes>
   );
 }
