@@ -8,7 +8,7 @@ import { MAX_DATA_POINTS } from "./_constant/ManagerDashboard-constant";
 import styles from "./_styles/ManagerDashboard.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useGetSampleMutation, useGetSampleQuery, usePostSampleMutation } from "./_operation/ManagerDashboard-fetch";
+import { useGetSampleMutation, usePostSampleMutation } from "./_operation/ManagerDashboard-fetch";
 import { useAppDispatch } from "../../_redux/storeType";
 
 const ManagerDashboard = () => {
@@ -26,7 +26,7 @@ const ManagerDashboard = () => {
 
   const { mutate } = useGetSampleMutation({ setCatFact, dispatch });
   const {mutate : postMutate} = usePostSampleMutation({setPostSample})
-  const {data} = useGetSampleQuery();
+  // const {data} = useGetSampleQuery();
 
   const handleClickPost = async () => {
     const data : TypePost =  {
@@ -44,7 +44,7 @@ const ManagerDashboard = () => {
 
   return (
     <section className={styles.dashboard_container}>
-      <div>{data.data.fact}</div>
+      {/* <div>{data.data.fact}</div> */}
       <div onClick={() => navigate("/")}>Home</div>
       <div className="text-black" onClick={() => navigate("resource")}>
         ajsfkljail

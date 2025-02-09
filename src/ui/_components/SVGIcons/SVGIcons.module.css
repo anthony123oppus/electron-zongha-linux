@@ -1,0 +1,24 @@
+.hour_hand {
+  animation: rotateHours 60s linear infinite;
+}
+.minute_hand {
+  animation: rotateMinutes 12s linear infinite;
+}
+
+@keyframes rotateHours {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateMinutes {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

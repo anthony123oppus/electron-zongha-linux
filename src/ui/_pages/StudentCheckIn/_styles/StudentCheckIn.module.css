@@ -1,0 +1,89 @@
+.student_checkin_container {
+    @apply h-screen w-full flex
+}
+
+.student_information {
+    @apply bg-[#1a3749] w-[28%] pl-10 py-10 pr-5 flex flex-col gap-5
+}
+
+/* .school_logo_container {
+    @apply relative flex items-center 
+}
+
+.school_logo {
+    @apply w-fit rounded-full p-1 z-20 bg-[#1ad1ff] flex justify-center items-center
+}
+
+.school_logo_img {
+    @apply h-20 w-20 rounded-full
+} */
+
+.school_logo_container {
+    @apply flex flex-col justify-center items-center
+}
+
+.school_logo {
+    @apply z-10 w-fit whitespace-nowrap font-semibold text-xl text-white  font-lexend
+}
+
+.school_logo_address {
+    @apply text-lg rounded-br-[20px] font-medium font-inter text-white
+}
+
+.school_logo_img {
+    @apply w-24 h-24
+}
+
+.student_checkin {
+    background: rgb(26,55,73);
+    background: linear-gradient(0deg, rgba(26,55,73,1) 8%, rgba(134,202,223,1) 100%);
+    @apply w-[72%] flex 
+}
+
+.student_checkin .student_profile {
+    @apply h-full w-[45%] flex flex-col py-10 items-center gap-10
+}
+
+.student_profile .student_header .header_text {
+    @apply text-3xl font-lexend font-bold text-white
+}
+
+.student_profile .student_profile_container {
+    @apply h-fit w-fit flex flex-col gap-10
+}
+
+.student_profile .student_profile_container .student_profile_pic {
+    @apply p-[2px] rounded-[13px] bg-mightnightBlue shadow-profilePicShadow
+}
+
+.student_pic {
+    @apply w-[18rem] bg-white rounded-[12px]
+}
+
+.student_log {
+    @apply w-fit h-fit flex flex-col
+}
+
+.attendance_log {
+    @apply bg-white flex gap-1 py-[4px] justify-center items-center shadow-profilePicShadow text-mightnightBlue w-fit px-2 rounded-t-[8px] text-[13px] font-bold font-lexend
+}
+
+.student_log_date_time {
+    @apply flex flex-col gap-4
+}
+
+.student_log_time {
+    @apply w-[18rem] shadow-profilePicShadow h-32 bg-black/50 backdrop-blur-3xl border border-white rounded-tr-[12px] flex justify-center items-center font-lexend text-[70px] text-white font-bold
+}
+
+.student_log_date {
+    @apply h-fit w-[18rem] shadow-profilePicShadow bg-black/50 backdrop-blur-3xl border border-white py-2 rounded-b-[12px] flex justify-center items-center text-white
+}
+
+.student_checkin .student_list {
+    @apply w-[65%] h-full pt-10  flex flex-col gap-4
+}
+
+.student_list_container {
+    @apply w-full h-full bg-black/50 backdrop-blur-3xl border border-white
+}

@@ -20,7 +20,7 @@ app.on("ready", () => {
 
   if (isDev()) {
     mainWindow.loadURL("http://localhost:5123");
-    mainWindow.webContents.openDevTools(); // This code will automatically open devtools when development mode
+    // mainWindow.webContents.openDevTools(); // This code will automatically open devtools when development mode
   } else {
     mainWindow.loadFile(getUIPath());
   }
