@@ -8,7 +8,7 @@ import { IpcRequestHandler } from "./api/ipcRequestHandler.js";
 
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
-    // frame : false,
+    frame : false,
     show : false,
     icon: getIconPath(),
     webPreferences: {
@@ -20,7 +20,7 @@ app.on("ready", () => {
 
   if (isDev()) {
     mainWindow.loadURL("http://localhost:5123");
-    // mainWindow.webContents.openDevTools(); // This code will automatically open devtools when development mode
+    mainWindow.webContents.openDevTools(); // This code will automatically open devtools when development mode
   } else {
     mainWindow.loadFile(getUIPath());
   }
