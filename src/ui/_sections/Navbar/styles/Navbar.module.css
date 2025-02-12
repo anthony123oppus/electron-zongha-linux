@@ -1,0 +1,41 @@
+.menu {
+    @apply h-screen fixed right-0 top-0 w-[25%] text-white bg-mightnightBlue translate-x-[100%]
+}
+
+.body {
+    box-sizing: border-box;
+    @apply h-full px-[50px] pt-[100px] pb-[50px] flex flex-col justify-between
+}
+
+.nav {
+    @apply flex flex-col text-[56px] gap-3 mt-20 h-full
+}
+
+.header {
+    text-transform: uppercase;
+    @apply border-b border-gray-500 mb-2
+}
+
+.nav_text{
+    @apply text-white font-[300] text-base
+}
+
+.svgCurve{
+    @apply absolute top-0 left-[-99px] w-[100px] h-full  fill-[#041c40] stroke-none
+}
+
+.svgCurve path {
+    @apply opacity-0
+}
+
+.footer {
+    @apply flex flex-col gap-8
+}
+
+.zongHa {
+    @apply flex flex-col gap-1
+}
+
+.link {
+    @apply flex w-full justify-between text-[12px] gap-4
+}

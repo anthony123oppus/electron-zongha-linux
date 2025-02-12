@@ -29,6 +29,9 @@ export default {
         insideShadow : 'inset 8px 8px 12px #c5c5c5, inset 4px 4px 12px #ffffff',
         outsideShadow : '6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff',
         profilePicShadow : 'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px'
+      },
+      dropShadow : {
+        blob : '0px 2px 30px rgba(0, 0, 0, 0.5)',
       }
     },
   },

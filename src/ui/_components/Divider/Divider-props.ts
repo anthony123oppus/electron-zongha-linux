@@ -6,7 +6,10 @@ export interface DividerLabelProps {
   style : DIVIDERSTYLE.DASHED | 
           DIVIDERSTYLE.DOUBLE |
           DIVIDERSTYLE.DOTTED |
-          DIVIDERSTYLE.SOLID
+          DIVIDERSTYLE.SOLID;
+  labelFont : LABELFONT.SMALL |
+              LABELFONT.MEDIUM |
+              LABELFONT.LARGE
 
   // TODO : FOR MORE IMPLEMENTAION
 }
@@ -22,4 +25,10 @@ export enum DIVIDERSTYLE {
     DOUBLE = "border-t-4 border-double",
     DOTTED = "border-t border-dotted",
     SOLID = "border-t border-solid"
+}
+
+export enum LABELFONT {
+  SMALL = "text-base",
+  MEDIUM = "text-2xl",
+  LARGE = "text-3xl"
 }

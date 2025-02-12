@@ -53,7 +53,7 @@
 }
 
 .student_profile .student_profile_container .student_profile_pic {
-    @apply p-[2px] rounded-[13px] bg-mightnightBlue shadow-profilePicShadow
+    @apply p-[2px] rounded-[13px] bg-mightnightBlue shadow-profilePicShadow relative
 }
 
 .student_pic {
@@ -73,6 +73,7 @@
 }
 
 .student_log_time {
+    background-image: radial-gradient(circle 120px at 50% 150%, rgba(255, 255, 255, 0.35), transparent);
     @apply w-[18rem] shadow-profilePicShadow h-32 bg-black/50 backdrop-blur-3xl border border-white rounded-tr-[12px] flex justify-center items-center font-lexend text-[70px] text-white font-bold
 }
 
@@ -85,5 +86,5 @@
 }
 
 .student_list_container {
-    @apply w-full h-full bg-black/50 backdrop-blur-3xl border border-white
+    @apply w-full h-full flex flex-col gap-5 pr-10 pb-10
 }
