@@ -100,5 +100,7 @@ interface Window {
     patchApiRequest : <T, R> (
       option : PatchApiRequestTypes<T>
     ) => Promise<ElectronSuccessResponseTypes<R>>;
+
+    sendReactReady : () => void
   };
 }

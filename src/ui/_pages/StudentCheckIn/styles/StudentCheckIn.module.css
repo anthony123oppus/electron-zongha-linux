@@ -1,22 +1,26 @@
 .student_checkin_container {
-    @apply h-screen w-full flex
+    @apply h-screen w-full flex flex-col xl:flex-row
+}
+
+.student_info_container {
+    @apply w-full xl:w-[55%] flex
 }
 
 .student_information {
-    @apply bg-[#1a3749] w-[28%] pl-10 py-10 pr-5 flex flex-col gap-5
+    @apply bg-[#1a3749] w-[50%] pl-10 py-10 pr-5 flex flex-col gap-5
 }
 
-/* .school_logo_container {
-    @apply relative flex items-center 
+.student_user_profile_card {
+    @apply w-full h-fit flex flex-col gap-4
 }
 
-.school_logo {
-    @apply w-fit rounded-full p-1 z-20 bg-[#1ad1ff] flex justify-center items-center
+.student_org_container {
+    @apply w-full h-full flex justify-center flex-wrap gap-2
 }
 
-.school_logo_img {
-    @apply h-20 w-20 rounded-full
-} */
+.student_org {
+    @apply rounded-full h-16 w-16 bg-white p-1
+}
 
 .school_logo_container {
     @apply flex flex-col justify-center items-center
@@ -35,13 +39,11 @@
 }
 
 .student_checkin {
-    background: rgb(26,55,73);
-    background: linear-gradient(0deg, rgba(26,55,73,1) 8%, rgba(134,202,223,1) 100%);
-    @apply w-[72%] flex 
+    @apply w-full xl:w-[45%] flex bg-reverse-gradient xl:bg-base-gradient;
 }
 
-.student_checkin .student_profile {
-    @apply h-full w-[45%] flex flex-col py-10 items-center gap-10
+.student_profile {
+    @apply h-full w-[50%] flex flex-col py-10 items-center gap-10 bg-base-gradient
 }
 
 .student_profile .student_header .header_text {
@@ -82,9 +84,13 @@
 }
 
 .student_checkin .student_list {
-    @apply w-[65%] h-full pt-10  flex flex-col gap-4
+    @apply w-full h-full pl-10 xl:pl-0 xl:pt-10 flex flex-col gap-4
 }
 
 .student_list_container {
-    @apply w-full h-full flex flex-col gap-5 pr-10 pb-10
+    @apply w-full h-full flex flex-col gap-5 pr-10 pb-10 mt-16
+}
+
+.student_recent_container {
+    @apply w-full h-full flex flex-wrap gap-5 justify-between
 }

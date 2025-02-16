@@ -1,17 +1,17 @@
 import styles from "./_styles/UserProfileCard.module.css";
 import { UserProfileCard } from "./_components-props";
 
-
 const UserprofileCard = (props : UserProfileCard) => {
 
     const {
+        id,
         icon,
         label,
         value
     } = props
 
   return (
-    <div className={styles.user_profile_card_container}>
+    <div id={id} className={styles.user_profile_card_container}>
       <h5 className={styles.user_profile_label}>
         {label}
       </h5>

@@ -1,3 +1,5 @@
+import { ipcRenderer } from "electron";
+
 const electron = require("electron");
 
 // exposeInMainWorld funtion -- basically just append what we adding in window object
@@ -27,7 +29,9 @@ electron.contextBridge.exposeInMainWorld("electron", {
     ipcDeleteApiInvoke<"apiDeleteRequest", R>("apiDeleteRequest", option),
   
   patchApiRequest : <T, R>(option : PatchApiRequestTypes<T>) =>
-    ipcPatchApiInvoke<"apiPatchRequest", T, R>("apiPatchRequest", option)
+    ipcPatchApiInvoke<"apiPatchRequest", T, R>("apiPatchRequest", option),
+
+  sendReactReady : () => ipcRenderer.send("react-ready")
 
 } satisfies Window["electron"]);
 

@@ -10,6 +10,10 @@ export function getPreloadPath() {
   );
 }
 
+export function getSplachScreen() {
+  return path.join(app.getAppPath(), "/splashScreen/splashScreen.html")
+}
+
 export function getUIPath() {
   return path.join(app.getAppPath(), "/dist-react/index.html");
 }
