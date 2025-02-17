@@ -10,12 +10,11 @@ import {
 import { createTray } from "./tray.js";
 import { createMenu } from "./menu.js";
 import { IpcRequestHandler } from "./api/ipcRequestHandler.js";
+import { ipcWindowControl } from "./windowControl.js";
 
 app.whenReady().then(() => {
   // Create splash screen
   const splashScreen = new BrowserWindow({
-    width: 400,
-    height: 300,
     frame: false,
     alwaysOnTop: true,
     transparent: true,
@@ -58,10 +57,14 @@ app.whenReady().then(() => {
       splashScreen.close();
     }
     mainWindow.show();
+    mainWindow.focus();
   });
-
+  
   // Separate all Request Handler
   IpcRequestHandler();
+
+  // Handle the window control
+  ipcWindowControl(mainWindow)
 
   // Create a Tray Icon and context menu in Notification Panel
   createTray(mainWindow);

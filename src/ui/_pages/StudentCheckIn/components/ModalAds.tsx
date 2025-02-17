@@ -60,6 +60,7 @@ const ModalAds: React.FC<ModalAdsProps> = (props) => {
         className="w-full h-full object-fill"
         loop
         muted
+        playsInline
         autoPlay
       >
         <source src={sampleVideo} type="video/mp4" />

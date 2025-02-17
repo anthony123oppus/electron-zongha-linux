@@ -82,8 +82,30 @@ const Navbar = () => {
     };
   }, [isActive]);
 
+  const handleFrameAction = (action: FrameWindowAction) => {
+    if (action) {
+      window.electron.sendFrameAction(action);
+    }
+  };
+
   return (
     <>
+      <div className={styles.window_control_container}>
+        <div className={styles.window_control}>
+          <button
+            className={styles.close_control}
+            onClick={() => handleFrameAction("CLOSE")}
+          />
+          <button
+            className={styles.minimize_control}
+            onClick={() => handleFrameAction("MINIMIZE")}
+          />
+          <button
+            className={styles.maximize_control}
+            onClick={() => handleFrameAction("MAXIMIZE")}
+          />
+        </div>
+      </div>
       <button
         ref={buttonRef}
         disabled={isButtonDisabled}

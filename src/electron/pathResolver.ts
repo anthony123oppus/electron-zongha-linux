@@ -11,7 +11,9 @@ export function getPreloadPath() {
 }
 
 export function getSplachScreen() {
-  return path.join(app.getAppPath(), "/splashScreen/splashScreen.html")
+  return isDev()
+    ? `file://${path.join(app.getAppPath(), "splashScreen", "splashScreen.html")}`
+    : `file://${path.join(process.resourcesPath, "splashScreen", "splashScreen.html")}`;
 }
 
 export function getUIPath() {
