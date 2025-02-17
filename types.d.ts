@@ -54,6 +54,8 @@ type ElectronSuccessResponseTypes<R> = {
   statusText: string;
 };
 
+type FrameWindowAction = "CLOSE" | "MINIMIZE" | "MAXIMIZE"
+
 type EventPayloadMapping = {
   statistics: Statistics;
   getStaticData: StaticData;
@@ -63,6 +65,7 @@ type EventPayloadMapping = {
   apiPutRequest : ElectronSuccessResponseTypes<unknown>;
   apiDeleteRequest : ElectronSuccessResponseTypes<unknown>;
   apiPatchRequest : ElectronSuccessResponseTypes<unknown>;
+  sendFrameAction : FrameWindowAction
 };
 
 type UnsubscribedFunction = () => void;
@@ -100,5 +103,9 @@ interface Window {
     patchApiRequest : <T, R> (
       option : PatchApiRequestTypes<T>
     ) => Promise<ElectronSuccessResponseTypes<R>>;
+
+    sendFrameAction : (payload : FrameWindowAction) => void
+
+    sendReactReady : () => void
   };
 }

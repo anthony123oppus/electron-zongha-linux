@@ -1,22 +1,41 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import { handleCloseEvents, ipcMainHandle, isDev } from "./util.js";
 import { getStaticData, PollResources } from "./resourceManager.js";
-import { getIconPath, getPreloadPath, getUIPath } from "./pathResolver.js";
+import {
+  getIconPath,
+  getPreloadPath,
+  getSplachScreen,
+  getUIPath,
+} from "./pathResolver.js";
 import { createTray } from "./tray.js";
 import { createMenu } from "./menu.js";
 import { IpcRequestHandler } from "./api/ipcRequestHandler.js";
+import { ipcWindowControl } from "./windowControl.js";
 
-app.on("ready", () => {
+app.whenReady().then(() => {
+  // Create splash screen
+  const splashScreen = new BrowserWindow({
+    frame: false,
+    alwaysOnTop: true,
+    transparent: true,
+    resizable: false,
+    fullscreen: true,
+    show: true,
+    icon: getIconPath(),
+  });
+
+  // LOAD THE SPLASH SCREEN
+  splashScreen.loadURL(getSplachScreen());
+
   const mainWindow = new BrowserWindow({
-    frame : false,
-    show : false,
+    frame: false,
+    show: false,
+    fullscreen: true,
     icon: getIconPath(),
     webPreferences: {
       preload: getPreloadPath(),
     },
   });
-
-  mainWindow.maximize();
 
   if (isDev()) {
     mainWindow.loadURL("http://localhost:5123");
@@ -32,12 +51,20 @@ app.on("ready", () => {
     return getStaticData();
   });
 
-  mainWindow.once("ready-to-show", () => {
-    mainWindow.show()
-  })
-
+  ipcMain.on("react-ready", () => {
+    // Check if splashScreen still exists before closing it
+    if (splashScreen && !splashScreen.isDestroyed()) {
+      splashScreen.close();
+    }
+    mainWindow.show();
+    mainWindow.focus();
+  });
+  
   // Separate all Request Handler
-  IpcRequestHandler()
+  IpcRequestHandler();
+
+  // Handle the window control
+  ipcWindowControl(mainWindow)
 
   // Create a Tray Icon and context menu in Notification Panel
   createTray(mainWindow);
@@ -48,4 +75,3 @@ app.on("ready", () => {
   // Handle when to close and hide the application
   handleCloseEvents(mainWindow);
 });
-

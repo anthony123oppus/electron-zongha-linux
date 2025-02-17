@@ -1,0 +1,11 @@
+.recent_student_container {
+    @apply w-[180px] h-fit bg-white relative rounded-[15px] overflow-hidden shadow-profilePicShadow
+}
+
+.recent_student_image {
+    @apply w-[180px] bg-white
+}
+
+.recent_student_lastname {
+    @apply text-xl font-semibold leading-4 font-lexend
+}

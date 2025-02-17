@@ -2,7 +2,14 @@
     "appId" : "com.zongha.smart-id",
     "files" : ["dist-electron", "dist-react"],
     "icon" : "./public/e.png",
-    "extraResources" : ["dist-electron/preload.cjs", "src/assets/**"],
+    "extraResources" : [
+        "dist-electron/preload.cjs",
+        "src/assets/**",
+        {
+            "from" : "splashScreen/",
+            "to" : "splashScreen/"
+        }
+    ],
     "directories" : {
         "output" : "releases"
     },

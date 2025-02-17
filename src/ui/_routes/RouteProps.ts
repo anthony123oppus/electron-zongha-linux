@@ -22,7 +22,7 @@ export const ROUTEPROPS: { [key: string]: RoutePropsInterface } = {
   },
   STUDENT_CHECKIN : {
     label : "Student Check In",
-    path : "student-checkIn",
+    path : "/student-checkIn",
     element : StudentCheckIn
   }
 };

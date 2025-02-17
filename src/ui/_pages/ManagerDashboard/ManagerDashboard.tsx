@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useGetSampleMutation, usePostSampleMutation } from "./_operation/ManagerDashboard-fetch";
 import { useAppDispatch } from "../../_redux/storeType";
+import DefaultLayout from "../../_sections/Layout/DefaultLayout";
 
 const ManagerDashboard = () => {
   const navigate = useNavigate();
@@ -43,37 +44,39 @@ const ManagerDashboard = () => {
   };
 
   return (
-    <section className={styles.dashboard_container}>
-      {/* <div>{data.data.fact}</div> */}
-      <div onClick={() => navigate("/")}>Home</div>
-      <div className="text-black" onClick={() => navigate("resource")}>
-        ajsfkljail
-      </div>
-      <div>{catFact}</div>
-      <div>{postSample && postSample.name}</div>
+    <DefaultLayout>
+      <section className={styles.dashboard_container}>
+        {/* <div>{data.data.fact}</div> */}
+        <div onClick={() => navigate("/")}>Home</div>
+        <div className="text-black" onClick={() => navigate("resource")}>
+          ajsfkljail
+        </div>
+        <div>{catFact}</div>
+        <div>{postSample && postSample.name}</div>
 
-      <div onClick={handleClickPost}>hello try post</div>
-      <div onClick={() => mutate()}>Smaple Gte request</div>
-      <BaseChart<UsageType>
-        dataKey="cpuUsage"
-        className={styles.chart}
-        data={cpuUsage}
-        tooltipLabel="CPU Usage"
-      />
-      <BaseChart<UsageType>
-        dataKey="ramUsage"
-        className={styles.chart}
-        data={ramUsage}
-        tooltipLabel="Ram Usage"
-      />
+        <div onClick={handleClickPost}>hello try post</div>
+        <div onClick={() => mutate()}>Smaple Gte request</div>
+        <BaseChart<UsageType>
+          dataKey="cpuUsage"
+          className={styles.chart}
+          data={cpuUsage}
+          tooltipLabel="CPU Usage"
+        />
+        <BaseChart<UsageType>
+          dataKey="ramUsage"
+          className={styles.chart}
+          data={ramUsage}
+          tooltipLabel="Ram Usage"
+        />
 
-      <BaseChart<UsageType>
-        dataKey="storageUsage"
-        className={styles.chart}
-        data={storageUsage}
-        tooltipLabel="Storage Usage"
-      />
-    </section>
+        <BaseChart<UsageType>
+          dataKey="storageUsage"
+          className={styles.chart}
+          data={storageUsage}
+          tooltipLabel="Storage Usage"
+        />
+      </section>
+    </DefaultLayout>
   );
 };
 

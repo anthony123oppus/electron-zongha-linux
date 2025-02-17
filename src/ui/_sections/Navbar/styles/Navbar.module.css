@@ -39,3 +39,27 @@
 .link {
     @apply flex w-full justify-between text-[12px] gap-4
 }
+
+.window_control_container {
+    -webkit-app-region : drag;
+    @apply w-screen absolute top-0 left-0
+}
+
+.window_control {
+    @apply w-28 h-7 bg-white rounded-br-full shadow-insideShadow flex justify-evenly items-center pr-3
+}
+
+.close_control {
+    -webkit-app-region : no-drag;
+    @apply h-[17px] w-[17px] rounded-full bg-red-500
+}
+
+.minimize_control {
+    -webkit-app-region : no-drag;
+    @apply h-[17px] w-[17px] rounded-full bg-yellow-500
+}
+
+.maximize_control {
+    -webkit-app-region : no-drag;
+    @apply h-[17px] w-[17px] rounded-full bg-green-500
+}

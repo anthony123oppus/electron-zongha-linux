@@ -1,7 +1,22 @@
-import { ReactNode } from "react"
+import { ReactNode } from "react";
+import { GENDERENUM } from "../../../_globalTypes/GlobalTypes";
 
 export interface UserProfileCard {
-    icon : ReactNode
-    label : string
-    value : string | number
+  id?: string;
+  icon: ReactNode;
+  label: string;
+  value: string | number;
+}
+
+export interface StudentDataInterface {
+  image: string;
+  gender: GENDERENUM.MALE | GENDERENUM.FEMALE;
+  lastName: string;
+  firstName: string;
+  middleInitial: string;
+}
+
+export interface RecentStudentCardProps {
+  id?: string;
+  student: StudentDataInterface;
 }

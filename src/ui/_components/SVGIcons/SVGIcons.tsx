@@ -1,3 +1,4 @@
+import { GENDERENUM } from "../../_globalTypes/GlobalTypes";
 import styles from "./SVGIcons.module.css";
 
 export const ClockIcon = () => {
@@ -106,5 +107,43 @@ export const HamburgerMenu = () => {
         className={`transition-transform duration-300`}
       />
     </svg>
+  );
+};
+
+interface NameSVGIconProps {
+  gender: GENDERENUM.FEMALE | GENDERENUM.MALE;
+}
+
+export const NameSVGIcon = (props: NameSVGIconProps) => {
+  const { gender } = props;
+
+  return (
+    <>
+      <svg
+        className="absolute -left-20 -bottom-40 w-80 drop-shadow-blob"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill="white"
+          d="M38.5,-49.5C53.5,-50.3,71.7,-45.7,79.3,-34.6C86.8,-23.5,83.7,-6,75.5,6.8C67.3,19.5,54.1,27.4,44.1,37.3C34.2,47.2,27.5,59.1,19.4,57.7C11.3,56.3,1.7,41.6,-6.6,33.9C-14.8,26.2,-21.7,25.5,-35.3,23.2C-48.9,20.8,-69.2,16.8,-77,6.9C-84.9,-3,-80.4,-18.8,-73.1,-32.8C-65.8,-46.8,-55.8,-59,-43.1,-59.3C-30.5,-59.5,-15.2,-47.8,-1.7,-45.1C11.8,-42.4,23.5,-48.6,38.5,-49.5Z"
+          transform="translate(100 100)"
+        />
+      </svg>
+      <svg
+        className="absolute -left-20 -bottom-[164px] w-80"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill={gender === GENDERENUM.MALE 
+                  ? "#1AD1FF" 
+                  : "#FF0066"
+                }
+          d="M38.5,-49.5C53.5,-50.3,71.7,-45.7,79.3,-34.6C86.8,-23.5,83.7,-6,75.5,6.8C67.3,19.5,54.1,27.4,44.1,37.3C34.2,47.2,27.5,59.1,19.4,57.7C11.3,56.3,1.7,41.6,-6.6,33.9C-14.8,26.2,-21.7,25.5,-35.3,23.2C-48.9,20.8,-69.2,16.8,-77,6.9C-84.9,-3,-80.4,-18.8,-73.1,-32.8C-65.8,-46.8,-55.8,-59,-43.1,-59.3C-30.5,-59.5,-15.2,-47.8,-1.7,-45.1C11.8,-42.4,23.5,-48.6,38.5,-49.5Z"
+          transform="translate(100 100)"
+        />
+      </svg>
+    </>
   );
 };

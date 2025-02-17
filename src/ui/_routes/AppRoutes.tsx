@@ -1,12 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import { ROUTEPROPS } from "./RouteProps";
+import { createElement } from "react";
 
 export function AppRoutes() {
   return (
       <Routes>
         <Route
           path={ROUTEPROPS.HOME.path}
-          element={<ROUTEPROPS.HOME.element />}
+          element={createElement(ROUTEPROPS.HOME.element)}
         />
         <Route 
             path="/sample" 

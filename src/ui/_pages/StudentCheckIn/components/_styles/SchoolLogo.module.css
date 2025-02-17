@@ -1,0 +1,15 @@
+.school_logo_container {
+    @apply flex flex-col justify-center items-center
+}
+
+.school_logo {
+    @apply z-10 w-fit whitespace-nowrap font-semibold text-xl text-white font-lexend
+}
+
+.school_logo_address {
+    @apply text-lg rounded-br-[20px] font-medium font-inter text-white
+}
+
+.school_logo_img {
+    @apply w-24 h-24
+}

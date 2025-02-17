@@ -25,6 +25,10 @@ export default {
         vividbLUE : "#1f8ef2",
         
       },
+      backgroundImage: {
+        'base-gradient': "linear-gradient(0deg, rgba(26,55,73,1) 8%, rgba(134,202,223,1) 100%)",
+        'reverse-gradient': "linear-gradient(0deg, rgba(134,202,223,1) 8%, rgba(26,55,73,1) 100%)",
+      },
       boxShadow : {
         insideShadow : 'inset 8px 8px 12px #c5c5c5, inset 4px 4px 12px #ffffff',
         outsideShadow : '6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff',

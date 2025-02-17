@@ -5,7 +5,6 @@ import Loader from "./_components/Loader/Loader";
 import { InitialLoaderStateTypes } from "./_redux/loader.slice";
 import { RootState, useAppSelector } from "./_redux/storeType";
 
-
 function App() {
   const navigate = useNavigate();
 
@@ -16,6 +15,10 @@ function App() {
   useEffect(() => {
     return window.electron.subscribeSystemView((view) => navigate(view));
   }, [navigate]);
+
+  useEffect(() => {
+    window.electron.sendReactReady();
+  },[])
 
   return (
     <Fragment>

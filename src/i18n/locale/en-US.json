@@ -2,5 +2,11 @@
     "common" : {
         "home" : "Home",
         "sample" : "Sample alone {{aham}}"
+    },
+    "studentCheckin" : {
+        "personalInformation" : "Student Personal Information",
+        "studentOrgs" : "Student Organization",
+        "lastLog" : "LAST STUDENT LOG",
+        "recentUpdates" : "RECENT STUDENT UPDATES"
     }
 }
