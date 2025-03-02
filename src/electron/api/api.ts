@@ -1,10 +1,10 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import axiosInstance from "./axiosInstance.js";
 
 // GET API REQUEST HANDLER
 export async function getApiRequest<R>(
   payload: GetAPIPayloadTypes
-): Promise<ElectronSuccessResponseTypes<R> | AxiosError> {
+): Promise<ElectronSuccessResponseTypes<R>> {
 
   // DESTRUCTURING PROPS
   const { url, headers } = payload;
@@ -22,13 +22,31 @@ export async function getApiRequest<R>(
       data: response.data,
       status: response.status,
       statusText: response.statusText,
+      success : true,
+      message : "Request Executed Successfully"
     } as ElectronSuccessResponseTypes<R>;
 
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      return error; // Return AxiosError if caught
+      // Throw a serializable error object
+      throw {
+        name: "ApiError",
+        message: error.message,
+        status: error.response?.status || 500,
+        statusText: error.response?.statusText || "Unknown Error",
+        data: error.response?.data || null,
+        success: false,
+      } as ElectronErrorResponseTypes;
     } else {
-      throw new AxiosError("An unexpected error occurred");
+      // Handle non-Axios errors
+      throw {
+        name: "UnknownError",
+        message: "An unexpected error occurred",
+        status: 500,
+        statusText: "Internal Server Error",
+        data: null,
+        success: false,
+      } as ElectronErrorResponseTypes;
     }
   }
 }
@@ -36,7 +54,7 @@ export async function getApiRequest<R>(
 // POST API REUQEST HANDLER
 export async function postApiRequest<T, R>(
   payload: PostApiRequestTypes<T>
-): Promise<ElectronSuccessResponseTypes<R> | AxiosError> {
+): Promise<ElectronSuccessResponseTypes<R>> {
 
   // DESTRUCTURING PROPS
   const { url, data, headers } = payload;
@@ -54,13 +72,31 @@ export async function postApiRequest<T, R>(
       data: response.data,
       status: response.status,
       statusText: response.statusText,
+      success : true,
+      message : "Fetching succssfully"
     } as ElectronSuccessResponseTypes<R>;
 
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      return error; // Return AxiosError if caught
+      // Throw a serializable error object
+      throw {
+        name: "ApiError",
+        message: error.message,
+        status: error.response?.status || 500,
+        statusText: error.response?.statusText || "Unknown Error",
+        data: error.response?.data || null,
+        success: false,
+      } as ElectronErrorResponseTypes;
     } else {
-      throw new AxiosError("An unexpected error occurred");
+      // Handle non-Axios errors
+      throw {
+        name: "UnknownError",
+        message: "An unexpected error occurred",
+        status: 500,
+        statusText: "Internal Server Error",
+        data: null,
+        success: false,
+      } as ElectronErrorResponseTypes;
     }
   }
 }
@@ -68,7 +104,7 @@ export async function postApiRequest<T, R>(
 // PUT API REQUEST HANDLER
 export async function putApiRequest<T, R>(
   payload: PutApiRequestTypes<T>
-): Promise<ElectronSuccessResponseTypes<R> | AxiosError> {
+): Promise<ElectronSuccessResponseTypes<R>> {
 
   // DESTRUCTURING PROPS
   const { url, data, headers } = payload;
@@ -86,13 +122,31 @@ export async function putApiRequest<T, R>(
       data: response.data,
       status: response.status,
       statusText: response.statusText,
+      success : true,
+      message : "Fetching succssfully"
     } as ElectronSuccessResponseTypes<R>;
 
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      throw error;
+      // Throw a serializable error object
+      throw {
+        name: "ApiError",
+        message: error.message,
+        status: error.response?.status || 500,
+        statusText: error.response?.statusText || "Unknown Error",
+        data: error.response?.data || null,
+        success: false,
+      } as ElectronErrorResponseTypes;
     } else {
-      throw new AxiosError("An unexpected error occurred");
+      // Handle non-Axios errors
+      throw {
+        name: "UnknownError",
+        message: "An unexpected error occurred",
+        status: 500,
+        statusText: "Internal Server Error",
+        data: null,
+        success: false,
+      } as ElectronErrorResponseTypes;
     }
   }
 }
@@ -100,7 +154,7 @@ export async function putApiRequest<T, R>(
 // DELETE API REQUEST HANDLER
 export async function deleteApiRequest<R>(
   payload : DeleteApiRequestTypes
-) : Promise<ElectronSuccessResponseTypes<R> | AxiosError> {
+) : Promise<ElectronSuccessResponseTypes<R>> {
 
   // DESTRUCTURING PROPS
   const {url, headers }  = payload
@@ -118,13 +172,31 @@ export async function deleteApiRequest<R>(
       data: response.data,
       status: response.status,
       statusText: response.statusText,
+      success : true,
+      message : "Fetching succssfully"
     } as ElectronSuccessResponseTypes<R>;
 
   } catch (error) {
-    if(axios.isAxiosError(error)) {
-      return error;
-    }else{
-      throw new AxiosError("An unexpected error occurred")
+    if (axios.isAxiosError(error)) {
+      // Throw a serializable error object
+      throw {
+        name: "ApiError",
+        message: error.message,
+        status: error.response?.status || 500,
+        statusText: error.response?.statusText || "Unknown Error",
+        data: error.response?.data || null,
+        success: false,
+      } as ElectronErrorResponseTypes;
+    } else {
+      // Handle non-Axios errors
+      throw {
+        name: "UnknownError",
+        message: "An unexpected error occurred",
+        status: 500,
+        statusText: "Internal Server Error",
+        data: null,
+        success: false,
+      } as ElectronErrorResponseTypes;
     }
   }
 }
@@ -132,7 +204,7 @@ export async function deleteApiRequest<R>(
 // PATCH API REQUEST HANDLER
 export async function patchApiRequest<T,R>(
   payload : PatchApiRequestTypes<T>
-) : Promise<ElectronSuccessResponseTypes<R> | AxiosError> {
+) : Promise<ElectronSuccessResponseTypes<R>> {
 
   // DESTRUCTURING PROPS
   const {url, data, headers} = payload
@@ -149,14 +221,32 @@ export async function patchApiRequest<T,R>(
     return  {
       data : response.data,
       status : response.status,
-      statusText : response.statusText
+      statusText : response.statusText,
+      success : true,
+      message : "Fetching succssfully"
     } as ElectronSuccessResponseTypes<R>
 
   } catch (error) {
-    if(axios.isAxiosError(error)) {
-      return error;
+    if (axios.isAxiosError(error)) {
+      // Throw a serializable error object
+      throw {
+        name: "ApiError",
+        message: error.message,
+        status: error.response?.status || 500,
+        statusText: error.response?.statusText || "Unknown Error",
+        data: error.response?.data || null,
+        success: false,
+      } as ElectronErrorResponseTypes;
     } else {
-      throw new AxiosError("An unexpected error occurred")
+      // Handle non-Axios errors
+      throw {
+        name: "UnknownError",
+        message: "An unexpected error occurred",
+        status: 500,
+        statusText: "Internal Server Error",
+        data: null,
+        success: false,
+      } as ElectronErrorResponseTypes;
     }
   }
 }

@@ -1,9 +1,21 @@
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
-import { sampleGetService, samplePostService } from "../../../_services";
+import {
+  sampleDeleteService,
+  sampleGetService,
+  samplePatchService,
+  samplePostService,
+  samplePutService,
+} from "../../../_services";
 import { Dispatch, SetStateAction } from "react";
 import { AppDispatch } from "../../../_redux/storeType";
 import { loaderActions } from "../../../_redux/loader.slice";
-import { CatFactReqTypes, PostResponse, TypePost } from "../ManagerDashboard-props";
+import {
+  CatFactReqTypes,
+  PostResponse,
+  PutResponse,
+  TypePost,
+  TypePut,
+} from "../ManagerDashboard-props";
 
 interface UseGetSampleMutationProps {
   setCatFact: Dispatch<SetStateAction<string>>;
@@ -21,27 +33,27 @@ const useGetSampleMutation = ({
       setCatFact(data.data.fact);
     },
     onError: (error) => {
-      console.log(error, "error sa mutation");
-      dispatch(loaderActions.setReset())
+      console.log("Error in mutation:", error);
+      dispatch(loaderActions.setReset());
     },
-    onMutate : () => {
-      dispatch(loaderActions.setloading("Searching"))
+    onMutate: () => {
+      dispatch(loaderActions.setloading("Searching"));
     },
-    onSettled : () => {
-      dispatch(loaderActions.setReset())
-    }
+    onSettled: () => {
+      dispatch(loaderActions.setReset());
+    },
   });
 };
 
 const useGetSampleQuery = () => {
   return useSuspenseQuery({
-    queryKey : ["getsamplequery"],
-    queryFn : sampleGetService<CatFactReqTypes>,
-  })
-}
+    queryKey: ["getsamplequery"],
+    queryFn: sampleGetService<CatFactReqTypes>,
+  });
+};
 
 interface UsePostSampleMutationProps {
-  setPostSample: Dispatch<SetStateAction<PostResponse | null>>;
+  setPostSample: Dispatch<SetStateAction<PostResponse | PutResponse | null>>;
 }
 
 const usePostSampleMutation = ({
@@ -56,4 +68,45 @@ const usePostSampleMutation = ({
   });
 };
 
-export { useGetSampleMutation, usePostSampleMutation, useGetSampleQuery };
+const usePutSampleMutation = ({
+  setPostSample,
+}: UsePostSampleMutationProps) => {
+  return useMutation({
+    mutationKey: ["putSampleData"],
+    mutationFn: samplePutService<TypePut, PutResponse>,
+    onSuccess: (data: ElectronSuccessResponseTypes<PutResponse>) => {
+      setPostSample(data.data);
+    },
+  });
+};
+
+const usePatchSampleMutation = ({
+  setPostSample,
+}: UsePostSampleMutationProps) => {
+  return useMutation({
+    mutationKey: ["patchMutation"],
+    mutationFn: samplePatchService<{ name: string }, PutResponse>,
+    onSuccess: (data: ElectronSuccessResponseTypes<PutResponse>) => {
+      setPostSample(data.data);
+    },
+  });
+};
+
+const useDeleteSampleMutation = () => {
+  return useMutation({
+    mutationKey: ["sampleDeleteRequest"],
+    mutationFn: sampleDeleteService<{ message: string }>,
+    onSuccess: (data: ElectronSuccessResponseTypes<{ message: string }>) => {
+      console.log(data, "Data");
+    },
+  });
+};
+
+export {
+  useGetSampleMutation,
+  usePostSampleMutation,
+  useGetSampleQuery,
+  usePutSampleMutation,
+  usePatchSampleMutation,
+  useDeleteSampleMutation,
+};

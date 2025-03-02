@@ -21,6 +21,10 @@ export function AppRoutes() {
           path={ROUTEPROPS.STUDENT_CHECKIN.path}
           element={<ROUTEPROPS.STUDENT_CHECKIN.element />}
         />
+        <Route
+          path={ROUTEPROPS.SYSTEM_DASHBOARD.path}
+          element={<ROUTEPROPS.SYSTEM_DASHBOARD.element />}
+        />
       </Routes>
   );
 }

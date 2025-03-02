@@ -52,7 +52,18 @@ type ElectronSuccessResponseTypes<R> = {
   data: R;
   status: number;
   statusText: string;
+  success : boolean
+  message : string
 };
+
+type ElectronErrorResponseTypes = {
+  data : unknown | null
+  status : number
+  success : boolean
+  statusText : string
+  message : string
+  name : string
+}
 
 type FrameWindowAction = "CLOSE" | "MINIMIZE" | "MAXIMIZE"
 
