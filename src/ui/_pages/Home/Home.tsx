@@ -1,36 +1,36 @@
 import styles from "./styles/Home.module.css";
 import { circleImage, schoolLogo, studentImage } from "../../_utils/image-util";
-import { useEffect } from "react";
-import { useGetSampleRfid } from "./_operation/Home-fetch";
+// import { useEffect } from "react";
+// import { useGetSampleRfid } from "./_operation/Home-fetch";
 import { useNavigate } from "react-router-dom";
 import DefaultLayout from "../../_sections/Layout/DefaultLayout";
 
 const Home = () => {
 
-  const {mutate} = useGetSampleRfid()
+  // const {mutate} = useGetSampleRfid()
   const navigate = useNavigate()
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    let text = "";
+  //   let text = "";
 
-    const handleKeyDown = (event : KeyboardEvent) => {
-      if (event.key === "Enter") {
-        console.log("Sending request with:", text);
-        if(text !== "") {
-          mutate(text)
-          // sendRequest(text);
-          text = ""
-        }
-      } else if (event.key.length === 1) {
-        text = text + event.key;
-      } else if (event.key === "Backspace") {
-        text = text.slice(0, -1);
-      }
-    }
+  //   const handleKeyDown = (event : KeyboardEvent) => {
+  //     if (event.key === "Enter") {
+  //       console.log("Sending request with:", text);
+  //       if(text !== "") {
+  //         mutate(text)
+  //         // sendRequest(text);
+  //         text = ""
+  //       }
+  //     } else if (event.key.length === 1) {
+  //       text = text + event.key;
+  //     } else if (event.key === "Backspace") {
+  //       text = text.slice(0, -1);
+  //     }
+  //   }
 
-    window.addEventListener("keydown", handleKeyDown)
-  }, [mutate])
+  //   window.addEventListener("keydown", handleKeyDown)
+  // }, [mutate])
 
   return (
     <DefaultLayout>

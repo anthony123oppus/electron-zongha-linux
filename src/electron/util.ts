@@ -37,8 +37,40 @@ export function ipcApiRequestHandler<Key extends keyof EventPayloadMapping, T, R
 ) {
   ipcMain.handle(key, async (event, payload) => {
     if(event.senderFrame) {
-      validateEventFrame(event.senderFrame)
-      return handler(payload)
+      try {
+          const response = await handler(payload);
+          
+          return response;
+      } catch (error) {
+        let serializableError : ElectronErrorResponseTypes;
+
+        if (isElectronErrorResponse(error)) {
+          // If the error is already a CustomError, use it directly
+          serializableError = error;
+        } else if (error instanceof Error) {
+          // If the error is a standard Error object, convert it to a CustomError
+          serializableError = {
+            name: "ApiError",
+            message: error.message,
+            status: 500,
+            statusText: "Internal Server Error",
+            data: null,
+            success: false,
+          };
+        } else {
+          // Handle unknown error types
+          serializableError = {
+            name: "UnknownError",
+            message: "An unexpected error occurred",
+            status: 500,
+            statusText: "Internal Server Error",
+            data: null,
+            success: false,
+          };
+        }
+
+        return serializableError;
+      }
     }
   })
 }
@@ -93,4 +125,15 @@ export function handleCloseEvents(mainWindow: BrowserWindow) {
   mainWindow.on("show", () => {
     willClose = false;
   });
+}
+
+
+function isElectronErrorResponse (error : unknown) : error is ElectronErrorResponseTypes  {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "name" in error &&
+    "message" in error &&
+    "success" in error
+  )
 }

@@ -7,7 +7,7 @@
 }
 
 .student_information {
-    @apply bg-[#1a3749] w-[50%] pl-10 py-10 pr-5 flex flex-col gap-5
+    @apply bg-darkTeal w-[50%] pl-10 py-10 pr-5 flex flex-col gap-5
 }
 
 .student_user_profile_card {

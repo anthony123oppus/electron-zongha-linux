@@ -19,11 +19,11 @@ const Navbar = () => {
   const sampleMenu = [
     {
       label: "Dashboard",
-      navigate: ROUTEPROPS.STUDENT_CHECKIN.path,
+      navigate: ROUTEPROPS.SYSTEM_DASHBOARD.path,
     },
     {
       label: "Settings",
-      navigate: ROUTEPROPS.MANAGER.path,
+      navigate: ROUTEPROPS.STUDENT_CHECKIN.path,
     },
   ];
 

@@ -10,65 +10,36 @@ import styles from "./styles/StudentCheckIn.module.css";
 import UserprofileCard from "./components/UserProfileCard";
 import RecentStudentCard from "./components/RecentStudentCard";
 import DefaultLayout from "../../_sections/Layout/DefaultLayout";
-import { GENDERENUM } from "../../_globalTypes/GlobalTypes";
 import { useProfileAnim, useRecentStudentAnim, useSchoolLogo } from "./hooks/useAnimation";
 import SchoolLogo from "./components/SchoolLogo";
 import { useInactiveScreen } from "./hooks/useInactiveScreen";
 import ModalAds from "./components/ModalAds";
 import { translate } from "../../../i18n/translate";
+import { StudentCheckInMutation, StudentInterface } from "./operation/StudentCheckin-fetch";
+import { useState } from "react";
+import { useRfidListener } from "./hooks/useRfidListener";
 
-const studentSampleData = [
-  {
-    id: 1,
-    image: studentImage,
-    gender: GENDERENUM.MALE,
-    lastName: "Diminio",
-    firstName: "Satta Nash",
-    middleInitial: "D",
-  },
-  {
-    id: 2,
-    image: studentImage,
-    gender: GENDERENUM.FEMALE,
-    lastName: "Lana",
-    firstName: "Samantha",
-    middleInitial: "D",
-  },
-  {
-    id: 3,
-    image: studentImage,
-    gender: GENDERENUM.MALE,
-    lastName: "Lapalapa",
-    firstName: "Sapatacio",
-    middleInitial: "D",
-  },
-  {
-    id: 4,
-    image: studentImage,
-    gender: GENDERENUM.FEMALE,
-    lastName: "Regla",
-    firstName: "Puberta",
-    middleInitial: "B",
-  },
-  {
-    id: 5,
-    image: studentImage,
-    gender: GENDERENUM.MALE,
-    lastName: "Sayop",
-    firstName: "Perfecto",
-    middleInitial: "D",
-  },
-  {
-    id: 6,
-    image: studentImage,
-    gender: GENDERENUM.FEMALE,
-    lastName: "Diminio",
-    firstName: "Satta Nash",
-    middleInitial: "D",
-  },
-];
+
+const defaultArray : StudentInterface[] =  Array.from({ length: 7 }, (_, index) => ({
+  created_at: null,
+  first_name: "Anthony",
+  grade_level: "Alufan",
+  last_name: "Oppus",
+  parent_contact: "09987654444",
+  rfid_tag: "",
+  section_id: 23,
+  status: 23,
+  updated_at: null,
+  year_id: 89,
+  id: index + 1, // Ensure unique IDs
+}))
 
 const StudentCheckIn = () => {
+
+  // STATE BLOCKS CODE
+  const [studentLog, setStudentLog] = useState<StudentInterface[]>(defaultArray);
+  
+  
 
   // ANIMATION HOOKS BLOCKS CODE
   useProfileAnim()
@@ -78,6 +49,36 @@ const StudentCheckIn = () => {
   // NORMAL HOOKS BLOCKS CODE
   const {isInactive, setIsInactive} = useInactiveScreen(10000)
 
+  // Mutation Hooks for RFID READER
+  const {mutate : rfidMutate } = StudentCheckInMutation({setStudentLog})
+
+  // RFID LISTENERS HOOKS
+  useRfidListener(rfidMutate)
+  
+  if(studentLog.length !== 0) {
+    console.log(studentLog)
+  } 
+
+  const studentExistChecker = (student : StudentInterface) => {
+    if(student) {
+      return student
+    }else {
+      return {
+        created_at: null,
+        first_name: "Anthony",
+        grade_level: "Alufan",
+        id: 2,
+        last_name: "Oppus",
+        parent_contact: "09987654444",
+        rfid_tag: "",
+        section_id: 23,
+        status: 23,
+        updated_at: null,
+        year_id: 89
+      }
+    }
+  }
+ 
   return (
     <DefaultLayout>
       <section className={styles.student_checkin_container}>
@@ -95,13 +96,13 @@ const StudentCheckIn = () => {
                 id="infoTag"
                 label="Full Name"
                 icon={<FullNameIcon />}
-                value="Bautista, Kristel Jane B."
+                value={`${studentExistChecker(studentLog[0]).first_name} ${studentExistChecker(studentLog[0]).last_name}`}
               />
               <UserprofileCard
                 id="infoTag"
                 label="Yr & Section"
                 icon={<FullNameIcon />}
-                value="Grade - 9 Grasshopper"
+                value={`${studentExistChecker(studentLog[0]).grade_level}`}
               />
               <UserprofileCard
                 id="infoTag"
@@ -205,10 +206,10 @@ const StudentCheckIn = () => {
                 />
               </div>
               <div className={styles.student_recent_container}>
-                {studentSampleData &&
-                  studentSampleData.map((student) => (
+                {studentLog &&
+                  studentLog.slice(1).map((student, index) => (
                     <RecentStudentCard 
-                      key={student.id} 
+                      key={index} 
                       id="recentStudent"
                       student={student} 
                     />

@@ -47,43 +47,73 @@ function ipcInvoke<Key extends keyof EventPayloadMapping>(
 }
 
 // GET API REQUEST INVOKE
-function ipcGetApiInvoke<Key extends keyof EventPayloadMapping, R>(
+async function ipcGetApiInvoke<Key extends keyof EventPayloadMapping, R>(
   key: Key,
   option: GetAPIPayloadTypes
 ): Promise<ElectronSuccessResponseTypes<R>> {
-  return electron.ipcRenderer.invoke(key, option);
+  const response = await electron.ipcRenderer.invoke(key, option);
+
+  if (response && response.success === false) {
+    throw response; // Throw the error object
+  }
+  
+  return response;
 }
 
 // POST API REQUEST INVOKE
-function ipcPostApiInvoke<Key extends keyof EventPayloadMapping, T, R>(
+async function ipcPostApiInvoke<Key extends keyof EventPayloadMapping, T, R>(
   key: Key,
   option: PostApiRequestTypes<T>
 ): Promise<ElectronSuccessResponseTypes<R>> {
-  return electron.ipcRenderer.invoke(key, option);
+  const response = await electron.ipcRenderer.invoke(key, option);
+
+  if (response && response.success === false) {
+    throw response;
+  }
+
+  return response;
 }
 
 // PUT API REQUEST INVOKE
-function ipcPutApiInvoke<Key extends keyof EventPayloadMapping, T, R>(
+async function ipcPutApiInvoke<Key extends keyof EventPayloadMapping, T, R>(
   key : Key,
   option : PutApiRequestTypes<T>
 ) : Promise<ElectronSuccessResponseTypes<R>> {
-  return electron.ipcRenderer.invoke(key, option);
+  const response = await electron.ipcRenderer.invoke(key, option);
+
+  if (response && response.success === false) {
+    throw response;
+  }
+
+  return response;
 }
 
 // DELETE API REQUEST INVOKE
-function ipcDeleteApiInvoke<Key extends keyof EventPayloadMapping, R>(
+async function ipcDeleteApiInvoke<Key extends keyof EventPayloadMapping, R>(
   key : Key,
   option : DeleteApiRequestTypes
 ) : Promise<ElectronSuccessResponseTypes<R>> {
-  return electron.ipcRenderer.invoke(key, option)
+  const response = await electron.ipcRenderer.invoke(key, option);
+
+  if (response && response.success === false) {
+    throw response;
+  }
+
+  return response;
 }
 
 // PATCH API REQUEST INVOKE
-function ipcPatchApiInvoke<Key extends keyof EventPayloadMapping, T, R>(
+async function ipcPatchApiInvoke<Key extends keyof EventPayloadMapping, T, R>(
   key : Key,
   option : PatchApiRequestTypes<T>
 ) : Promise<ElectronSuccessResponseTypes<R>> {
-  return electron.ipcRenderer.invoke(key, option)
+  const response = await electron.ipcRenderer.invoke(key, option);
+
+  if (response && response.success === false) {
+    throw response;
+  }
+
+  return response;
 }
 
 function ipcOn<Key extends keyof EventPayloadMapping>(
